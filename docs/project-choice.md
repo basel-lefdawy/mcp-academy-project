@@ -1,0 +1,1 @@
+I am building an offline Notes & FAQ Search application for students and professionals so that they can quickly find information from their personal notes without an internet connection.
