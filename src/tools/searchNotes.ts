@@ -1,5 +1,5 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { searchNotesInputSchema } from "../schemas/index.js";
+import { searchNotesInputSchema } from "../schemas/searchNotes.js";
 
 export function registerSearchNotesTool(server: McpServer) {
   server.registerTool(

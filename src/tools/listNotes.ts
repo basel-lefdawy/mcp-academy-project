@@ -1,5 +1,5 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { listNotesInputSchema } from "../schemas/index.js";
+import { listNotesInputSchema } from "../schemas/listNotes.js";
 
 export function registerListNotesTool(server: McpServer) {
   server.registerTool(
