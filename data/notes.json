@@ -1,0 +1,128 @@
+[
+  {
+    "id": "note-001",
+    "title": "Model Context Protocol",
+    "content": "MCP allows AI models to interact with external tools and access local data safely.",
+    "category": "AI",
+    "tags": ["ai", "mcp", "tools"]
+  },
+  {
+    "id": "note-002",
+    "title": "Process Scheduling",
+    "content": "The operating system decides which process runs at a given time using scheduling algorithms such as round robin or priority scheduling.",
+    "category": "Operating Systems",
+    "tags": ["os", "scheduling", "process"]
+  },
+  {
+    "id": "note-003",
+    "title": "React Component State",
+    "content": "State in React stores data that can change over time and causes the component to re-render when updated.",
+    "category": "React",
+    "tags": ["react", "state", "frontend"]
+  },
+  {
+    "id": "note-004",
+    "title": "Git Basics",
+    "content": "Git tracks changes in files and allows branching, committing, and merging to manage software versions.",
+    "category": "Development",
+    "tags": ["git", "version-control", "dev"]
+  },
+  {
+    "id": "note-005",
+    "title": "SQL Joins",
+    "content": "Joins in SQL combine rows from two or more tables based on related columns, enabling more complex queries.",
+    "category": "Databases",
+    "tags": ["sql", "database", "joins"]
+  },
+  {
+    "id": "note-006",
+    "title": "Binary Search",
+    "content": "Binary search finds an element in a sorted array by repeatedly dividing the search interval in half.",
+    "category": "Algorithms",
+    "tags": ["algorithm", "search", "efficiency"]
+  },
+  {
+    "id": "note-007",
+    "title": "TCP vs UDP",
+    "content": "TCP is connection-oriented and reliable, while UDP is connectionless and often used for latency-sensitive traffic.",
+    "category": "Networks",
+    "tags": ["network", "tcp", "udp"]
+  },
+  {
+    "id": "note-008",
+    "title": "Password Hashing",
+    "content": "Secure systems store password hashes rather than plaintext passwords to reduce the impact of data breaches.",
+    "category": "Security",
+    "tags": ["security", "hashing", "passwords"]
+  },
+  {
+    "id": "note-009",
+    "title": "REST APIs",
+    "content": "REST APIs expose resources over HTTP and use standard methods such as GET, POST, PUT, and DELETE.",
+    "category": "Development",
+    "tags": ["api", "http", "backend"]
+  },
+  {
+    "id": "note-010",
+    "title": "Deadlocks",
+    "content": "A deadlock occurs when processes wait on each other indefinitely because each holds resources needed by another.",
+    "category": "Operating Systems",
+    "tags": ["os", "deadlock", "concurrency"]
+  },
+  {
+    "id": "note-011",
+    "title": "Normalization",
+    "content": "Database normalization reduces redundancy and improves data integrity by organizing tables efficiently.",
+    "category": "Databases",
+    "tags": ["database", "schema", "design"]
+  },
+  {
+    "id": "note-012",
+    "title": "Dijkstra's Algorithm",
+    "content": "Dijkstra's algorithm finds the shortest path from a source node to all other nodes in a weighted graph.",
+    "category": "Algorithms",
+    "tags": ["graph", "shortest-path", "algorithm"]
+  },
+  {
+    "id": "note-013",
+    "title": "HTTP Status Codes",
+    "content": "Common HTTP status codes include 200 OK, 404 Not Found, and 500 Internal Server Error.",
+    "category": "Networks",
+    "tags": ["http", "web", "status-codes"]
+  },
+  {
+    "id": "note-014",
+    "title": "Two-Factor Authentication",
+    "content": "Two-factor authentication adds an extra verification step to make account access more secure.",
+    "category": "Security",
+    "tags": ["security", "authentication", "mfa"]
+  },
+  {
+    "id": "note-015",
+    "title": "React Hooks",
+    "content": "Hooks let functional components use state and lifecycle features without writing class components.",
+    "category": "React",
+    "tags": ["react", "hooks", "frontend"]
+  },
+  {
+    "id": "faq-001",
+    "title": "What is an operating system?",
+    "content": "An operating system manages hardware resources and provides services for applications.",
+    "category": "Operating Systems",
+    "tags": ["faq", "os", "definition"]
+  },
+  {
+    "id": "faq-002",
+    "title": "What is a database index?",
+    "content": "A database index improves query performance by allowing faster lookup of rows.",
+    "category": "Databases",
+    "tags": ["faq", "database", "index"]
+  },
+  {
+    "id": "faq-003",
+    "title": "What is HTTPS?",
+    "content": "HTTPS is the secure version of HTTP that encrypts data exchanged between a client and a server.",
+    "category": "Security",
+    "tags": ["faq", "security", "https"]
+  }
+]
