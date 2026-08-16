@@ -1,5 +1,4 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { listCategoriesInputSchema } from "../schemas/listCategories.js";
 import { listCategories } from "../lib/notes.js";
 
 export function registerListCategoriesTool(server: McpServer) {
@@ -7,7 +6,6 @@ export function registerListCategoriesTool(server: McpServer) {
     "list_categories",
     {
       description: "List all available note categories.",
-      inputSchema: listCategoriesInputSchema,
     },
     async () => {
       const categories = await listCategories(10);
