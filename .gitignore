@@ -2,7 +2,12 @@ node_modules/
 dist/
 build/
 .env
+.env.local
 .env.*
+*.pem
+*.key
+*.p12
+*.crt
 *.log
 .DS_Store
 .vscode/
