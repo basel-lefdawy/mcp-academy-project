@@ -1,4 +1,4 @@
-import { readDataFile } from "./file.js";
+import { readDataFile, writeDataFile } from "./file.js";
 
 export interface NoteRecord {
   id: string;
@@ -6,6 +6,12 @@ export interface NoteRecord {
   content: string;
   category: string;
   tags: string[];
+}
+
+export interface AddNoteInput {
+  title: string;
+  content: string;
+  category?: string;
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -39,9 +45,81 @@ function normalizeNotes(raw: unknown): NoteRecord[] {
   });
 }
 
+function makeTags(title: string, content: string, category?: string): string[] {
+  const words = [title, content, category ?? ""]
+    .join(" ")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, " ")
+    .split(/\s+/)
+    .filter((word) => word.length > 2);
+
+  return Array.from(new Set(words)).slice(0, 8);
+}
+
+function buildNoteId(notes: NoteRecord[]): string {
+  const usedIds = notes
+    .map((note) => note.id)
+    .filter((id) => /^note-\d+$/.test(id));
+
+  const nextNumber = usedIds.length
+    ? Math.max(
+        ...usedIds.map((id) => Number.parseInt(id.replace(/^note-/, ""), 10) || 0)
+      ) + 1
+    : 1;
+
+  return `note-${String(nextNumber).padStart(3, "0")}`;
+}
+
 export async function loadNotes(): Promise<NoteRecord[]> {
   const contents = await readDataFile("notes.json");
-  return normalizeNotes(JSON.parse(contents));
+
+  try {
+    return normalizeNotes(JSON.parse(contents));
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Unable to read notes data: ${error.message}`);
+    }
+
+    throw new Error("Unable to read notes data: invalid JSON or malformed notes file.");
+  }
+}
+
+export async function addNote(input: AddNoteInput): Promise<NoteRecord> {
+  const title = input.title?.trim();
+  const content = input.content?.trim();
+  const category = input.category?.trim() || "General";
+
+  if (!title) {
+    throw new Error("Title is required.");
+  }
+
+  if (!content) {
+    throw new Error("Content is required.");
+  }
+
+  const notes = await loadNotes();
+
+  const note: NoteRecord = {
+    id: buildNoteId(notes),
+    title,
+    content,
+    category,
+    tags: makeTags(title, content, category),
+  };
+
+  const nextNotes = [...notes, note];
+
+  try {
+    await writeDataFile("notes.json", `${JSON.stringify(nextNotes, null, 2)}\n`);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Unable to save the new note: ${error.message}`);
+    }
+
+    throw new Error("Unable to save the new note: write failed.");
+  }
+
+  return note;
 }
 
 function normalizeQuery(query: string): string {
