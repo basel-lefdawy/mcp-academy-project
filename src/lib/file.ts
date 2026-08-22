@@ -4,21 +4,10 @@ import fs from "fs/promises";
 const DATA_DIR = path.resolve("./data");
 
 export async function readDataFile(filename: string) {
-  const normalizedFilename = path.normalize(filename);
-  const parentPrefix = `..${path.sep}`;
+  const filePath = path.resolve(DATA_DIR, filename);
 
-  if (
-    path.isAbsolute(normalizedFilename) ||
-    normalizedFilename === ".." ||
-    normalizedFilename.startsWith(parentPrefix)
-  ) {
-    throw new Error("Invalid file path");
-  }
-
-  const filePath = path.resolve(DATA_DIR, normalizedFilename);
-  const relativePath = path.relative(DATA_DIR, filePath);
-
-  if (relativePath.startsWith(`..${path.sep}`) || relativePath === ".." || path.isAbsolute(relativePath)) {
+  // Prevent leaving the data folder
+  if (!filePath.startsWith(DATA_DIR)) {
     throw new Error("Invalid file path");
   }
 
