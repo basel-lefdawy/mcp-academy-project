@@ -1,0 +1,14 @@
+# P0 Tool Test Plan
+
+Before each case that changes `data/notes.json`, reset the fixture with `git checkout -- data/notes.json`. For the empty-data case, back up the fixture, replace it with `[]`, then restore the original file afterward. The offline/timeout case is simulated because the P0 tools are local-only and do not make network requests.
+
+| id | tool | setup | input | expected | result | evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| TC-01 | `search_notes` | Use the committed fixture; no reset needed. Reuse `examples/search_notes.json`. | `{ "query": "MCP", "limit": 5 }` | Successful response with `ok: true`; at least `note-001` (Model Context Protocol) is returned and no more than 5 matches are included. |  |  |
+| TC-02 | `search_notes` | Use the committed fixture. | `{ "query": "   " }` | Input validation rejects the request because `query` is empty after trimming. |  |  |
+| TC-03 | `add_note` | Reset `data/notes.json` before and after the case. Reuse `examples/add_note.json`. | `{ "title": "Model Context Protocol", "content": "MCP allows AI models to interact with external tools.", "category": "AI" }` | Successful response with `ok: true`; the supplied note fields are accepted. Restore the fixture after execution. |  |  |
+| TC-04 | `add_note` | Use the committed fixture; do not write the fixture if validation fails. | `{ "title": "", "content": "A note without a title." }` | Input validation rejects the request because `title` is empty. |  |  |
+| TC-05 | `list_notes` | Use the committed fixture. Reuse `examples/list_notes.json`. | `{ "category": "AI" }` | Successful response with `ok: true`; only notes in the `AI` category are returned. |  |  |
+| TC-06 | `list_notes` | Use the committed fixture. | `{ "category": "" }` | Input validation rejects the request because a provided category cannot be empty. |  |  |
+| TC-07 | `search_notes`, `add_note`, `list_notes` | Back up `data/notes.json`, replace its contents with `[]`, and restore it afterward. | `search_notes: { "query": "MCP" }`; `add_note: { "title": "Empty fixture note", "content": "Test content" }`; `list_notes: {}` | Each tool handles an empty fixture without crashing: search and list return zero matches/notes, while add accepts a valid note or reports the documented empty-fixture behavior. |  |  |
+| TC-08 | `search_notes`, `add_note`, `list_notes` | Simulate an unavailable or hanging local fixture read by blocking/renaming `data/notes.json` or using a controlled read timeout; restore the fixture afterward. | `search_notes: { "query": "MCP" }`; `add_note: { "title": "Offline test", "content": "Test content" }`; `list_notes: {}` | Each tool fails cleanly with an error for unavailable/timeout fixture access; no partial or misleading success response is returned. |  |  |
