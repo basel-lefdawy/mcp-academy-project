@@ -61,6 +61,8 @@ If the Inspector does not connect, check the troubleshooting section below.
 | `update_note` | Planned | Update an existing note. |
 | `delete_note` | Planned | Delete an existing note. |
 
+See also: [Example conversations](examples/conversations.md)
+
 ## Example prompts
 
 These are example requests an AI assistant or MCP client might send to the server:
