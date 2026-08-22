@@ -208,5 +208,21 @@
       "just",
       "testing"
     ]
+  },
+  {
+    "id": "note-017",
+    "title": "Project Kickoff",
+    "content": "We should confirm the sprint goals, owners, and delivery date.",
+    "category": "Planning",
+    "tags": [
+      "project",
+      "kickoff",
+      "should",
+      "confirm",
+      "the",
+      "sprint",
+      "goals",
+      "owners"
+    ]
   }
 ]
