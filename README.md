@@ -1,133 +1,139 @@
-# 📚 Notes & FAQ Search
+# Notes & FAQ Search MCP
 
-An offline **Model Context Protocol (MCP)** application that enables users to store, organize, and search personal notes and frequently asked questions (FAQs). The project exposes note management through MCP tools, allowing an AI assistant to retrieve and manage information using natural language while keeping all data stored locally.
+This project is a local Model Context Protocol (MCP) server for storing, searching, and organizing notes and FAQs. It lets an AI client or MCP-compatible tool call locally available functions such as searching notes, listing categories, and adding a new note without any cloud dependency.
 
-> Developed as part of the **NextFlows Academy – Building an MCP for an AI Engine** program.
+The server reads and writes data from the local `data/notes.json` file, so everything stays offline and private.
 
----
+## Requirements
 
-## ✨ Features
+Before running the project, make sure you have:
 
-* 🔍 Search notes and FAQs using keywords.
-* ➕ Add new notes or FAQ entries.
-* 📋 List all stored notes.
-* 📝 Update existing notes *(planned)*.
-* 🗑️ Delete notes *(planned)*.
-* 📂 Organize notes by category *(planned)*.
-* 💻 Fully offline with local storage.
-* 🔒 No paid APIs or cloud services required.
+- Node.js 18 or newer
+- npm
+- Git
+- A terminal or shell
 
----
+## Install
 
-## 🎯 Project Goals
-
-The goal of this project is to demonstrate how the **Model Context Protocol (MCP)** can expose local tools that allow an AI assistant to interact with a personal knowledge base.
-
-By the end of the project, users should be able to:
-
-* Maintain a collection of personal notes.
-* Search notes quickly using natural language or keywords.
-* Manage notes through MCP tools.
-* Keep all information private by storing everything locally.
-
----
-
-## 🛠️ Tech Stack
-
-* **TypeScript**
-* **Node.js**
-* **Model Context Protocol (MCP) SDK**
-* **JSON Local Storage** *(SQLite may be considered in future versions)*
-
----
-
-## 📦 MCP Tools
-
-| Tool              | Description                           | Status |
-| ----------------- | ------------------------------------- | ------ |
-| `search_notes`    | Search notes and FAQs using keywords. | ✅ P0   |
-| `add_note`        | Add a new note or FAQ entry.          | ✅ P0   |
-| `list_notes`      | Display all stored notes.             | ✅ P0   |
-| `update_note`     | Update an existing note.              | 🚧 P1  |
-| `delete_note`     | Delete a note.                        | 🚧 P1  |
-| `list_categories` | Display available categories.         | 🚧 P1  |
-
----
-
-## 📁 Project Structure
-
-```text
-.
-├── docs/
-│   └── design.md
-├── src/
-│   ├── data/
-│   ├── tools/
-│   └── index.ts
-├── package.json
-├── tsconfig.json
-└── README.md
-```
-
----
-
-## 🚀 Getting Started
-
-### Clone the repository
+Clone the repository and install dependencies:
 
 ```bash
 git clone https://github.com/basel-lefdawy/mcp-academy-project
 cd mcp-academy-project
-```
-
-### Install dependencies
-
-```bash
 npm install
 ```
 
-### Run the project
+## Run
+
+Start the MCP server locally:
 
 ```bash
 npm run dev
 ```
 
----
+This starts the server on stdio, which is how MCP clients connect to it.
 
+## Run with the MCP Inspector
 
-### Future Enhancements
+The easiest way to test the server manually is with the MCP Inspector.
 
-* Semantic search using embeddings.
-* AI-generated summaries.
-* Import/export notes.
-* SQLite database support.
-* Desktop or web interface.
-* Cloud synchronization.
+```bash
+npx @modelcontextprotocol/inspector npx tsx src/index.ts
+```
 
----
+This launches the Inspector UI directly. Once the page opens:
 
-## ✅ Success Criteria
+1. Click the `Connect` button
+2. The Inspector connects to the local server
+3. The Tools section appears with the available MCP tools
+4. You can test the tools from there
 
-The project will be considered successful if it can:
+If the Inspector does not connect, check the troubleshooting section below.
 
-* Search and return relevant notes from local storage.
-* Add and retrieve notes through MCP tools.
-* Operate completely offline.
-* Demonstrate all required P0 tools during Demo Day.
+## Tools
 
----
+| Tool | Status | Description |
+| --- | --- | --- |
+| `search_notes` | Implemented | Search notes and FAQs by keyword or phrase. |
+| `add_note` | Implemented | Add a new note or FAQ entry with a title, content, and optional category. |
+| `list_notes` | Implemented | List notes, optionally filtered by category. |
+| `list_categories` | Implemented | List all categories currently in the local notes store. |
+| `update_note` | Planned | Update an existing note. |
+| `delete_note` | Planned | Delete an existing note. |
+
+## Example prompts
+
+These are example requests an AI assistant or MCP client might send to the server:
+
+```text
+Search for notes related to MCP.
+```
+
+```text
+Add a note titled "Project Kickoff" with content "We will confirm the sprint plan and owners" in the Planning category.
+```
+
+```text
+List all notes in the AI category.
+```
+
+```text
+Show me the available note categories.
+```
+
+## Troubleshooting
+
+### 1) `npm install` fails
+
+This is usually caused by an unsupported Node version.
+
+Fix:
+
+```bash
+node -v
+```
+
+If the version is below 18, upgrade Node.js and retry:
+
+```bash
+npm install
+```
+
+### 2) The Inspector cannot connect to the server
+
+This usually means the Inspector is not configured to launch the app correctly.
+
+Check:
+
+- transport is set to `stdio`
+- command is `npm`
+- arguments are `run dev`
+- the project folder is the repo root
+
+If needed, restart the Inspector and reconnect.
+
+### 3) The tool fails because the notes file is empty or invalid
+
+The server expects `data/notes.json` to contain a valid JSON array of notes.
+
+Check:
+
+```bash
+cat data/notes.json
+```
+
+If the file is empty, malformed, or missing, restore a valid array before retrying.
 
 ## 📖 Academy
-
+[](https://github.com/basel-lefdawy/mcp-academy-project#-academy)
 This project is being developed as part of the **NextFlows Academy – Building an MCP for an AI Engine** program.
 
-Learn more:
-https://nextflows.ai/academy
+Learn more: [https://nextflows.ai/academy](https://nextflows.ai/academy)
 
 ---
 
 ## 👨‍💻 Author
-
+[](https://github.com/basel-lefdawy/mcp-academy-project#%E2%80%8D-author)
 **Basel Lefdawi**
 
 Computer Science Student
@@ -136,5 +142,7 @@ An-Najah National University
 ---
 
 ## 📄 License
-
+[](https://github.com/basel-lefdawy/mcp-academy-project#-license)
 This project is intended for educational purposes as part of the NextFlows Academy MCP training program.
+
+See the [LICENSE](LICENSE) file for the full MIT license terms.
