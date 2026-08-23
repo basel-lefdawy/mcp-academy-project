@@ -6,7 +6,8 @@ export function registerListCategoriesTool(server: McpServer) {
   server.registerTool(
     "list_categories",
     {
-      description: "List all available note categories.",
+      description:
+        "List only the available note category names. Use this when the user asks what categories exist. Do not use this to list notes or retrieve note content.",
       inputSchema: listCategoriesInputSchema,
     },
     async () => {

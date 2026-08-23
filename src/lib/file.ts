@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs/promises";
 
-const DATA_DIR = path.resolve("./data");
+const DATA_DIR = path.resolve(__dirname, "../../data");
 
 function ensureSafeDataPath(filename: string): string {
   const normalizedFilename = path.normalize(filename);

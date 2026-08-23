@@ -91,6 +91,18 @@ export async function loadNotes(): Promise<NoteRecord[]> {
   }
 }
 
+export async function getNote(noteId: string): Promise<NoteRecord> {
+  const normalizedNoteId = noteId.trim();
+  const notes = await loadNotes();
+  const note = notes.find((entry) => entry.id === normalizedNoteId);
+
+  if (!note) {
+    throw new Error(`Note not found: ${normalizedNoteId}`);
+  }
+
+  return note;
+}
+
 export async function addNote(input: AddNoteInput): Promise<NoteRecord> {
   const title = input.title?.trim();
   const content = input.content?.trim();
