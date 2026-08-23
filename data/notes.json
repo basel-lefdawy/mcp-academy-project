@@ -2,12 +2,17 @@
   {
     "id": "note-001",
     "title": "Model Context Protocol",
-    "content": "MCP allows AI models to interact with external tools and access local data safely.",
+    "content": "Model Context Protocol (MCP) is an open standard for connecting AI models to external tools, data sources, and systems in a structured, secure way.\n\nKey points:\n- Client-server architecture: an MCP client (e.g., an AI app) connects to one or more MCP servers, each exposing a set of capabilities.\n- Core primitives: Tools (callable functions the model can invoke), Resources (data the model can read, like files or DB records), and Prompts (reusable prompt templates).\n- Transport: communication typically happens over stdio (local) or HTTP/SSE (remote), using JSON-RPC messages.\n- Discovery: clients can query a server to list its available tools/resources before using them, so the model only sees relevant, permitted capabilities.\n- Safety: servers control exactly what's exposed and can enforce permissions, so the model interacts with external systems (databases, APIs, local files) without needing direct, unrestricted access.\n- Common uses: connecting an AI assistant to Google Drive, Slack, GitHub, databases, or custom internal tools without writing one-off integrations for each.\n\nIn short: MCP standardizes how AI models discover and call external capabilities, similar to how a plugin system lets an app add new functionality without changing its core code.",
     "category": "AI",
     "tags": [
-      "ai",
+      "model",
+      "context",
+      "protocol",
       "mcp",
-      "tools"
+      "open",
+      "standard",
+      "for",
+      "connecting"
     ]
   },
   {
@@ -223,6 +228,38 @@
       "sprint",
       "goals",
       "owners"
+    ]
+  },
+  {
+    "id": "note-018",
+    "title": "TypeScript",
+    "content": "TypeScript is a modern version of JavaScript. It's a superset of JavaScript developed by Microsoft that adds static typing on top of JS. Key points:\n\n- Any valid JavaScript is also valid TypeScript — you can adopt it gradually.\n- You add type annotations (e.g. `let age: number = 30;`) so the compiler can catch type-related bugs before the code even runs, rather than at runtime.\n- It compiles (\"transpiles\") down to plain JavaScript, so it runs anywhere JS runs (browsers, Node, etc.).\n- It gives much better autocomplete, refactoring, and inline documentation in editors like VS Code, since the tooling knows the exact shape of your data.\n- Popular in larger codebases and teams because it makes code easier to understand and safer to change.",
+    "category": "Programming",
+    "tags": [
+      "typescript",
+      "modern",
+      "version",
+      "javascript",
+      "superset",
+      "developed",
+      "microsoft",
+      "that"
+    ]
+  },
+  {
+    "id": "note-019",
+    "title": "Model Context Protocol (MCP)",
+    "content": "The Model Context Protocol (MCP) is an open standard for connecting AI models to external tools, data sources, and systems in a structured, secure way. It defines a common interface so an AI assistant can discover available tools/resources from an \"MCP server\" and call them, rather than needing custom integration code for every service. This makes it easier to plug things like file systems, databases, or third-party apps into an AI workflow safely and consistently.",
+    "category": "AI",
+    "tags": [
+      "model",
+      "context",
+      "protocol",
+      "mcp",
+      "the",
+      "open",
+      "standard",
+      "for"
     ]
   }
 ]

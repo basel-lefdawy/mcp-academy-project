@@ -6,7 +6,8 @@ export function registerListNotesTool(server: McpServer) {
   server.registerTool(
     "list_notes",
     {
-      description: "List all stored notes or filter them by category.",
+      description:
+        "List stored notes, including their IDs, titles, and categories, optionally filtered by category. Do not use this when the user asks only which categories exist; use list_categories instead.",
       inputSchema: listNotesInputSchema,
     },
     async (input) => {

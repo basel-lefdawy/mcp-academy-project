@@ -33,6 +33,30 @@ npm run dev
 
 This starts the server on stdio, which is how MCP clients connect to it.
 
+## Connect to Claude Desktop
+
+To connect this MCP server to Claude Desktop on Windows:
+
+1. Open Claude Desktop.
+2. Go to **Settings -> Developer -> Edit Config**.
+3. Add the following entry inside the `mcpServers` object. Replace `YOUR_USERNAME` if your project is in a different location:
+
+```json
+{
+	"mcpServers": {
+		"notes-faq-search-mcp": {
+			"command": "C:\\Program Files\\nodejs\\node.exe",
+			"args": [
+				"C:\\Users\\YOUR_USERNAME\\mcp-academy-project\\node_modules\\tsx\\dist\\cli.mjs",
+				"C:\\Users\\YOUR_USERNAME\\mcp-academy-project\\src\\index.ts"
+			]
+		}
+	}
+}
+```
+
+If `mcpServers` already contains other servers, add only the `notes-faq-search-mcp` entry rather than replacing the whole object. Fully quit and restart Claude Desktop after saving the configuration. The connector should then expose tools including `search_notes`, `list_notes`, `list_categories`, `get_note`, `add_note`, `update_note`, and `delete_note`.
+
 ## Run with the MCP Inspector
 
 The easiest way to test the server manually is with the MCP Inspector.
@@ -60,6 +84,7 @@ If the Inspector does not connect, check the troubleshooting section below.
 | `list_categories` | Implemented | List all categories currently in the local notes store. |
 | `update_note` | Implemented | Update one or more fields on an existing note. |
 | `delete_note` | Implemented | Delete an existing note by its identifier. |
+| `get_note` | Implemented | Retrieve the full contents of a note by its identifier. |
 
 See also: [Example conversations](examples/conversations.md)
 
