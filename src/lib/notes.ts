@@ -14,6 +14,13 @@ export interface AddNoteInput {
   category?: string;
 }
 
+export interface UpdateNoteInput {
+  noteId: string;
+  title?: string;
+  content?: string;
+  category?: string;
+}
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }
@@ -120,6 +127,68 @@ export async function addNote(input: AddNoteInput): Promise<NoteRecord> {
   }
 
   return note;
+}
+
+export async function updateNote(input: UpdateNoteInput): Promise<NoteRecord> {
+  const noteId = input.noteId.trim();
+  const notes = await loadNotes();
+  const noteIndex = notes.findIndex((note) => note.id === noteId);
+
+  if (noteIndex === -1) {
+    throw new Error(`Note not found: ${noteId}`);
+  }
+
+  const currentNote = notes[noteIndex];
+  const updatedNote: NoteRecord = {
+    ...currentNote,
+    title: input.title?.trim() ?? currentNote.title,
+    content: input.content?.trim() ?? currentNote.content,
+    category: input.category?.trim() ?? currentNote.category,
+    tags: makeTags(
+      input.title?.trim() ?? currentNote.title,
+      input.content?.trim() ?? currentNote.content,
+      input.category?.trim() ?? currentNote.category
+    ),
+  };
+
+  const nextNotes = [...notes];
+  nextNotes[noteIndex] = updatedNote;
+
+  try {
+    await writeDataFile("notes.json", `${JSON.stringify(nextNotes, null, 2)}\n`);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Unable to save the updated note: ${error.message}`);
+    }
+
+    throw new Error("Unable to save the updated note: write failed.");
+  }
+
+  return updatedNote;
+}
+
+export async function deleteNote(noteId: string): Promise<Pick<NoteRecord, "id">> {
+  const normalizedNoteId = noteId.trim();
+  const notes = await loadNotes();
+  const noteIndex = notes.findIndex((note) => note.id === normalizedNoteId);
+
+  if (noteIndex === -1) {
+    throw new Error(`Note not found: ${normalizedNoteId}`);
+  }
+
+  const nextNotes = notes.filter((note) => note.id !== normalizedNoteId);
+
+  try {
+    await writeDataFile("notes.json", `${JSON.stringify(nextNotes, null, 2)}\n`);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Unable to delete the note: ${error.message}`);
+    }
+
+    throw new Error("Unable to delete the note: write failed.");
+  }
+
+  return { id: normalizedNoteId };
 }
 
 function normalizeQuery(query: string): string {

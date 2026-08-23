@@ -58,8 +58,8 @@ If the Inspector does not connect, check the troubleshooting section below.
 | `add_note` | Implemented | Add a new note or FAQ entry with a title, content, and optional category. |
 | `list_notes` | Implemented | List notes, optionally filtered by category. |
 | `list_categories` | Implemented | List all categories currently in the local notes store. |
-| `update_note` | Planned | Update an existing note. |
-| `delete_note` | Planned | Delete an existing note. |
+| `update_note` | Implemented | Update one or more fields on an existing note. |
+| `delete_note` | Implemented | Delete an existing note by its identifier. |
 
 See also: [Example conversations](examples/conversations.md)
 
