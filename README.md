@@ -4,6 +4,10 @@ This project is a local Model Context Protocol (MCP) server for storing, searchi
 
 The server reads and writes data from the local `data/notes.json` file, so everything stays offline and private.
 
+## Demo
+
+![Claude Desktop demo](assets/demo.gif.gif)
+
 ## Requirements
 
 Before running the project, make sure you have:
